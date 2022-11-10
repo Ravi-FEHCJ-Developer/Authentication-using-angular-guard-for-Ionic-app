@@ -1,0 +1,141 @@
+<ion-content fullscreen="true">
+  <div class="row">
+    <div class="login-box">
+      <div class="login-key">
+        <i class="fa fa-user" aria-hidden="true"></i>
+      </div>
+      <div class="login-title">LOGIN PANEL</div>
+
+      <div class="login-form">
+        <div class="login-form">
+          <form [formGroup]="regCredentials">
+            <div class="form-group" *ngIf="!isLogin">
+              <label class="form-control-label" required>USERNAME</label>
+              <input
+                name="username"
+                formControlName="username"
+                type="text"
+                class="form-control"
+              />
+              <span
+                class="text-error"
+                *ngIf="regCredentials.get('username').hasError('required')  && regCredentials.get('username').touched"
+                >Please enter username</span
+              >
+            </div>
+            <div class="form-group">
+              <label class="form-control-label">Email</label>
+              <input
+                name="email"
+                formControlName="email"
+                type="email"
+                class="form-control"
+              />
+              <span
+                class="text-error"
+                *ngIf="regCredentials.get('email').hasError('required') && regCredentials.get('email').touched"
+                >Please enter valid email</span
+              >
+              <span
+                class="text-error"
+                *ngIf="regCredentials.get('email').hasError('pattern') && regCredentials.get('email').touched"
+                >Please enter valid email</span
+              >
+            </div>
+            <div class="form-group">
+              <label class="form-control-label" required>PASSWORD</label>
+              <input
+                name="pwd"
+                formControlName="pwd"
+                type="password"
+                [min]="8"
+                class="form-control"
+                />
+                <!-- (ngModelChange)="getRePwd($event , 2)" -->
+              <span
+                class="text-error"
+                *ngIf="regCredentials.get('pwd').hasError('required') && regCredentials.get('pwd').touched"
+                >Please enter Password</span
+              >
+              <span
+                class="text-error"
+                *ngIf="regCredentials.get('pwd').hasError('minlength') && regCredentials.get('pwd').touched"
+                >Password should be atleast 8 length.</span
+              >
+            </div>
+            <!-- <div class="form-group" *ngIf="!isLogin">
+              <label class="form-control-label">RE-PASSWORD</label>
+              <input
+                name="repwd"
+                [(ngModel)]="repwd"
+                type="password"
+                class="form-control"
+                formControlName="repwd"
+                [min]="8"
+                /> -->
+                <!-- (ngModelChange)="getRePwd($event , 1)" -->
+              <!-- <span
+              class="text-error"
+              *ngIf="regCredentials.get('repwd').hasError('required') && regCredentials.get('repwd').touched"
+              >Password does not match.</span
+            >
+            <span
+              class="text-error"
+              *ngIf="regCredentials.get('repwd').hasError('minlength') && regCredentials.get('repwd').touched"
+              >Password does not match.</span
+            > -->
+            <!-- <span
+              class="text-error"
+              *ngIf="misMatchPwd && regCredentials.get('repwd').touched"
+              >Password does not match.</span
+            > -->
+            <!-- </div> -->
+
+            <div class="button_switch_form">
+              <div class="loginbttm">
+                <div class="login-btm login-text"></div>
+                <div class="login-btm login-button">
+                  <button
+                    (click)="authenticate('signup')"
+                  *ngIf="!isLogin"
+                  id="submitbtn"
+                  type="submit"
+                    class="btn btn-outline-primary"
+                    [disabled]="regCredentials.invalid"
+                  >
+                    SIGN UP
+                  </button>
+
+                  <button
+                    (click)="authenticate('login')"
+                  *ngIf="isLogin"
+                    id="submitbtn"
+                    type="submit"
+                    class="btn btn-outline-primary"
+                    [disabled]="regCredentials.invalid"
+                  >
+                    LOGIN
+                  </button>
+                </div>
+              </div>
+              <div class="loginbttm">
+                <div class="login-btm login-text text-center">
+                  Switch To
+                  <span
+                    style="
+                      text-decoration: underline;
+                      color: white;
+                      cursor: pointer;
+                    "
+                    (click)="switchRegLogin()"
+                    >{{isLogin ? 'sign Up': 'Login'}}</span
+                  >
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

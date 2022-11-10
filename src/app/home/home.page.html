@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar style="--background: #1a2226">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light" menu="side-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light">{{email}}</ion-title>
+    <ion-title color="light" slot="primary" (click)="logOut()">
+      <ion-icon name="log-out-outline" size="large"></ion-icon>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="data" *ngIf="isLoading">
+    <div>
+      <img src="{{img}}" />
+    </div>
+    <div class="text_details">
+      <div>
+        <label>Name : </label>
+        <span>{{name}}</span>
+      </div>
+      <div>
+        <label>DOB : </label>
+        <span>{{dob}} years old</span>
+      </div>
+      <div>
+        <label>Gender : </label>
+        <span>{{gender}}</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="Multiple_cards">
+    <ion-card routerLink="infoedit">
+      <ion-card-header>
+        <ion-card-title color="light">Info-Edit</ion-card-title>
+      </ion-card-header>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="light">Card Title</ion-card-title>
+      </ion-card-header>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="light">Card Title</ion-card-title>
+      </ion-card-header>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="light">Card Title</ion-card-title>
+      </ion-card-header>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="light">Card Title</ion-card-title>
+      </ion-card-header>
+
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="light">Card Title</ion-card-title>
+      </ion-card-header>
+
+    </ion-card>
+
+  </section>
+</ion-content>

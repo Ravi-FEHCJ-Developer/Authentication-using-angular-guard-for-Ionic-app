@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar style="--background: #1a2226">
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Edit Info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section>
+    <form [formGroup]="updateCred" (ngSubmit)="update()">
+      <ion-list lines="full">
+        <ion-item>
+          <ion-label position="stacked">UID</ion-label>
+          <ion-input
+            readonly
+            formControlName="id"
+            inputmode="number"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Username</ion-label>
+          <ion-input formControlName="username" inputmode="text" required></ion-input>
+        </ion-item>
+        <span
+          class="text-error"
+          *ngIf="updateCred.get('username').hasError('required') && updateCred.get('username').touched"
+          >Please Enter Username.</span
+        >
+
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input formControlName="email" inputmode="text"></ion-input>
+        </ion-item>
+        <span
+          class="text-error"
+          *ngIf="updateCred.get('email').hasError('pattern') && updateCred.get('email').touched"
+          >Please Enter Valid Email.</span
+        >
+      </ion-list>
+
+      <div class="ion-padding">
+        <ion-button
+          expand="block"
+          type="submit"
+          [disabled]="updateCred.invalid"
+          class="ion-no-margin"
+          >Update</ion-button
+        >
+      </div>
+    </form>
+  </section>
+</ion-content>
