@@ -2,6 +2,8 @@
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/quotes */
 import { Component } from '@angular/core';
+import { Storage } from '@capacitor/storage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   navigate : any;
-  constructor()
+  constructor(private route: Router)
   {
     this.navigate =
     [
@@ -22,13 +24,35 @@ export class AppComponent {
       {
         title : "Info Edit",
         url   : "home/infoedit",
-        icon  : "chatbubbles-sharp"
+        icon  : "create"
       },
       {
-        title : "Contacts",
-        url   : "/contacts",
+        title : "Projects Lists",
+        url   : "home/projectslist",
         icon  : "call-sharp"
+      },
+      {
+        title : "Logout",
+        url   : "/login",
+        icon  : "log-out-outline",
+        logout: 'logout'
       },
     ]
   }
+  logOut(notation: string)
+  {
+    if(notation === 'logout')
+    {
+      Storage.remove({
+        key: 'isUserLogin'
+      }).then((res: any)=>
+      {
+        if(!res)
+        {
+          this.route.navigate(['login'])
+        }
+      })
+    }
+  }
 }
+

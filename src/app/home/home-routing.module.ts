@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'infoedit',
     loadChildren: () => import('./info-edit/info-edit.module').then( m => m.InfoEditPageModule)
+  },
+  {
+    path: 'projectslist',
+    loadChildren: () => import('./projects-list/projects-list.module').then( m => m.ProjectsListPageModule)
   }
 ];
 

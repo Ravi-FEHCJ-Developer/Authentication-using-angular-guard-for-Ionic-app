@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Projects List</ion-title>
+    <ion-buttons slot="primary">
+      <ion-menu-button color="light" menu="side-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section>
+    <ion-item class="box" style="width: 100%">
+      <ion-label position="floating">Search Projects</ion-label>
+      <ion-input type="text" placeholder="Search Project...." (click)="searchProject($event)" name="search" [(ngModel)]="search"></ion-input>
+      <ion-icon slot="end" name="search"></ion-icon>
+    </ion-item>
+
+    <ion-list class="list">
+      <ion-card>
+        <ion-card-header>
+          <ion-list>
+            <ion-item>
+              <ion-label>IMDb: Movies</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Goodreads: Books</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Zomato: Restaurants</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Practo: Doctors</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Online Calculator</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Online Timer</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Conversion Tool</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label
+                >JSON Parser, URL Encoder/Decoder, Escape Tool, etc</ion-label
+              >
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Speed Test</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>URL Shortener (Requires Backend as well)</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>To-do list</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label
+                >Board games like Sudoku, Tic-Tac-Toe, 2048, etc.</ion-label
+              >
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Card games like BlackJack, Solitaire, etc.</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Basic number or word games.</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>General Shopping: Amazon, Flipkart</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Food: Swiggy, Zomato</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Flight Tickets: MakeMyTrip</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Movie Tickets: BookMyShow</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Hotels: OYO</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Grocery: BigBasket, Grofers</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+            <ion-item>
+              <ion-label>Courses: Coursera, Udemy, workat.tech, etc.</ion-label>
+              <ion-icon name="caret-forward-outline"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </ion-card-header>
+      </ion-card>
+    </ion-list>
+  </section>
+</ion-content>

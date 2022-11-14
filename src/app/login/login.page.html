@@ -4,7 +4,8 @@
       <div class="login-key">
         <i class="fa fa-user" aria-hidden="true"></i>
       </div>
-      <div class="login-title">LOGIN PANEL</div>
+      <div class="login-title" *ngIf="isLogin">Login</div>
+      <div class="login-title" *ngIf="!isLogin">Sign Up</div>
 
       <div class="login-form">
         <div class="login-form">
@@ -63,33 +64,12 @@
                 >Password should be atleast 8 length.</span
               >
             </div>
-            <!-- <div class="form-group" *ngIf="!isLogin">
-              <label class="form-control-label">RE-PASSWORD</label>
-              <input
-                name="repwd"
-                [(ngModel)]="repwd"
-                type="password"
-                class="form-control"
-                formControlName="repwd"
-                [min]="8"
-                /> -->
-                <!-- (ngModelChange)="getRePwd($event , 1)" -->
-              <!-- <span
-              class="text-error"
-              *ngIf="regCredentials.get('repwd').hasError('required') && regCredentials.get('repwd').touched"
-              >Password does not match.</span
-            >
-            <span
-              class="text-error"
-              *ngIf="regCredentials.get('repwd').hasError('minlength') && regCredentials.get('repwd').touched"
-              >Password does not match.</span
-            > -->
-            <!-- <span
-              class="text-error"
-              *ngIf="misMatchPwd && regCredentials.get('repwd').touched"
-              >Password does not match.</span
-            > -->
-            <!-- </div> -->
+
+              <ion-item lines="none" class="rememberMe">
+                <ion-checkbox slot="start" [indeterminate]="false" (ionChange)="checkboxes($event)"></ion-checkbox>
+                <ion-label>Remember Me</ion-label>
+              </ion-item>
+
 
             <div class="button_switch_form">
               <div class="loginbttm">

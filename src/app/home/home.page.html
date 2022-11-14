@@ -1,12 +1,9 @@
 <ion-header>
-  <ion-toolbar style="--background: #1a2226">
-    <ion-buttons slot="start">
+  <ion-toolbar>
+    <ion-title color="light">{{email}}</ion-title>
+    <ion-buttons slot="primary">
       <ion-menu-button color="light" menu="side-menu"></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light">{{email}}</ion-title>
-    <ion-title color="light" slot="primary" (click)="logOut()">
-      <ion-icon name="log-out-outline" size="large"></ion-icon>
-    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -17,15 +14,15 @@
     </div>
     <div class="text_details">
       <div>
-        <label>Name : </label>
+        <label>Name<b>:</b></label>
         <span>{{name}}</span>
       </div>
       <div>
-        <label>DOB : </label>
+        <label>DOB<b>:</b></label>
         <span>{{dob}} years old</span>
       </div>
       <div>
-        <label>Gender : </label>
+        <label>Gender<b>:</b></label>
         <span>{{gender}}</span>
       </div>
     </div>
@@ -39,9 +36,9 @@
 
     </ion-card>
 
-    <ion-card>
+    <ion-card routerLink="projectslist">
       <ion-card-header>
-        <ion-card-title color="light">Card Title</ion-card-title>
+        <ion-card-title color="light">Projects</ion-card-title>
       </ion-card-header>
 
     </ion-card>

@@ -10,6 +10,8 @@ import { Storage } from '@capacitor/storage';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -24,8 +26,9 @@ export class HomePage implements OnInit
   dob: any
   gender: any
   email: string
-  constructor(private authenticationService: AuthenticationService, private route: Router,private activeRoute: ActivatedRoute,private menu: MenuController)
+  constructor(private authenticationService: AuthenticationService, private route: Router,private activeRoute: ActivatedRoute,private menu: MenuController, public loadingController: LoadingController)
   {
+    this.presentLoading()
     this.getUserData();
   }
   ngOnInit() {
@@ -33,6 +36,19 @@ export class HomePage implements OnInit
       this.getUserData();
     });
 }
+
+  async presentLoading()
+  {
+    const loading = await this.loadingController.create({
+      message: 'Loading....',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+
+    console.log('Loading dismissed!');
+  }
 
 
   getUserData()
@@ -54,19 +70,6 @@ export class HomePage implements OnInit
             this.isLoading = true;
           }
         });
-    })
-  }
-
-  logOut()
-  {
-    Storage.remove({
-      key: 'isUserLogin'
-    }).then((res: any)=>
-    {
-      if(!res)
-      {
-        this.route.navigate(['login'])
-      }
     })
   }
 }

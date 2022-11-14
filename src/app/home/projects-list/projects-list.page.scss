@@ -1,0 +1,54 @@
+section
+{
+  padding: 5%;
+}
+
+.box {
+  // border-color: #403E39;
+  // border-width: thin;
+  // border-style: solid;
+  // border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+
+  ion-icon
+  {
+    position: absolute;
+    right: 0%;
+  }
+}
+
+.list
+{
+  padding-top: 10%;
+
+  ion-card
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ion-icon
+    {
+      font-size: larger;
+    }
+  }
+
+    ion-item
+    {
+      display: flex;
+      align-items: center;
+    }
+
+    ion-label
+    {
+      width: 70%;
+    }
+    ion-icon
+    {
+      width: 45%;
+    }
+}
+
+

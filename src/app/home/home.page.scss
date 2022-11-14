@@ -19,9 +19,17 @@ label
   }
   .text_details
   {
+    padding-left: 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    div
+    {
+      display: flex;
+      justify-content: flex-start;
+      align-items: baseline;
+    }
   }
 }
 
@@ -45,6 +53,7 @@ label
     -webkit-box-shadow: 9px 10px 10px -6px rgba(0,0,0,0.72);
     -moz-box-shadow: 9px 10px 10px -6px rgba(0,0,0,0.72);
     box-shadow: 9px 10px 10px -6px rgba(0,0,0,0.72);
+    opacity: 0.9;
 
     ion-card-header
     {
