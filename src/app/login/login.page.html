@@ -1,11 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon (click)="presentPopover($event)" slot="primary" style="font-size: x-large; font-size: x-large; padding-right: 5%;" color="light" name="settings-outline"></ion-icon>
+    <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+      <ng-template>
+        <ion-content class="ion-padding" routerLink="forgetpwd" (click)="closePopover()">Forget Password</ion-content>
+        <ion-content class="ion-padding" routerLink="" (click)="closePopover()">Change Theme</ion-content>
+      </ng-template>
+    </ion-popover>
+
+  <ion-title color="light" *ngIf="isLogin">Login</ion-title>
+    <ion-title color="light" *ngIf="!isLogin">Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content fullscreen="true">
   <div class="row">
     <div class="login-box">
       <div class="login-key">
         <i class="fa fa-user" aria-hidden="true"></i>
       </div>
-      <div class="login-title" *ngIf="isLogin">Login</div>
-      <div class="login-title" *ngIf="!isLogin">Sign Up</div>
+      <!-- <div class="login-title" *ngIf="isLogin">Login</div>
+      <div class="login-title" *ngIf="!isLogin">Sign Up</div> -->
 
       <div class="login-form">
         <div class="login-form">
@@ -51,8 +66,8 @@
                 type="password"
                 [min]="8"
                 class="form-control"
-                />
-                <!-- (ngModelChange)="getRePwd($event , 2)" -->
+              />
+              <!-- (ngModelChange)="getRePwd($event , 2)" -->
               <span
                 class="text-error"
                 *ngIf="regCredentials.get('pwd').hasError('required') && regCredentials.get('pwd').touched"
@@ -65,11 +80,15 @@
               >
             </div>
 
-              <ion-item lines="none" class="rememberMe">
-                <ion-checkbox slot="start" [indeterminate]="false" (ionChange)="checkboxes($event)"></ion-checkbox>
-                <ion-label>Remember Me</ion-label>
-              </ion-item>
-
+            <ion-item lines="none" class="rememberMe">
+              <ion-checkbox
+                slot="start"
+                [indeterminate]="false"
+                (ionChange)="checkboxes($event)"
+                [checked]="checkboxStatus"
+              ></ion-checkbox>
+              <ion-label>Remember Me</ion-label>
+            </ion-item>
 
             <div class="button_switch_form">
               <div class="loginbttm">
@@ -77,9 +96,9 @@
                 <div class="login-btm login-button">
                   <button
                     (click)="authenticate('signup')"
-                  *ngIf="!isLogin"
-                  id="submitbtn"
-                  type="submit"
+                    *ngIf="!isLogin"
+                    id="submitbtn"
+                    type="submit"
                     class="btn btn-outline-primary"
                     [disabled]="regCredentials.invalid"
                   >
@@ -88,7 +107,7 @@
 
                   <button
                     (click)="authenticate('login')"
-                  *ngIf="isLogin"
+                    *ngIf="isLogin"
                     id="submitbtn"
                     type="submit"
                     class="btn btn-outline-primary"
@@ -98,8 +117,8 @@
                   </button>
                 </div>
               </div>
-              <div class="loginbttm">
-                <div class="login-btm login-text text-center">
+              <div class="SwitchLoginLogout">
+                <div class="login-btm login-text">
                   Switch To
                   <span
                     style="

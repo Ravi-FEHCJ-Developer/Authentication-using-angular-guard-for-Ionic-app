@@ -56,7 +56,6 @@ export class AuthenticationService
 
   updateUserData(list)
   {
-    // console.log(list);
     Storage.get({
       key: 'authData',
     }).then((v)=>
@@ -68,6 +67,20 @@ export class AuthenticationService
           value: JSON.stringify(list),
         });
       }
+    });
+  }
+
+  getPwd()
+  {
+    return Storage.get({
+      key: 'password'
+    });
+  }
+
+  getIsRememberMe()
+  {
+    return Storage.get({
+      key: 'IsRememberMe'
     });
   }
 }

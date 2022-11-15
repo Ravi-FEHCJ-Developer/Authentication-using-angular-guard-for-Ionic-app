@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/adjacent-overload-signatures */
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/quotes */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { Storage } from '@capacitor/storage';
 import { Router, ActivatedRoute } from '@angular/router';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -17,17 +19,27 @@ import { connectableObservableDescriptor } from 'rxjs/internal/observable/Connec
 })
 export class LoginPage implements OnInit {
   regCredentials: FormGroup;
+
   isLogin: boolean = true;
   parsedArray: any = [];
   repwd: any;
   checkboxValue: any = 'No';
+  password: any = 'No';
+  checkboxStatus: any = 'No';
+
+  // popover
+  @ViewChild('popover') popover;
+  isOpen = false;
+
+
   constructor(
     private authenticationService: AuthenticationService,
     private route: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,public popoverController: PopoverController
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     this.regCredentials = new FormGroup({
       username: new FormControl(''),
       email: new FormControl('', [
@@ -38,9 +50,51 @@ export class LoginPage implements OnInit {
       ]),
       pwd: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
-    this.activatedRoute.queryParamMap.subscribe((params) => {
+    this.activatedRoute.queryParamMap.subscribe((params) =>
+    {
       this.isLogin = true;
+      this.authenticationService.isUserLogin().then(getEmail =>
+        {
+          if(getEmail)
+          {
+            this.authenticationService.getPwd().then(getPwd=>
+              {
+                if(getPwd)
+                {
+                  this.regCredentials.patchValue({
+                    email: JSON.parse(getEmail.value).email,
+                    pwd: getPwd.value
+                  });
+                }
+              })
+          }
+
+          this.authenticationService.getIsRememberMe().then((rememberMeChecked) =>
+          {
+            if(rememberMeChecked.value === 'yes')
+            {
+              this.checkboxStatus = true;
+            }
+            else if(rememberMeChecked.value === 'no')
+            {
+              this.checkboxStatus = false;
+            }
+            console.log(rememberMeChecked.value);
+          })
+        })
     });
+  }
+
+
+  presentPopover(e: Event)
+  {
+    this.popover.event = e;
+    this.isOpen = true;
+  }
+
+  closePopover()
+  {
+    this.popoverController.dismiss();
   }
 
   switchRegLogin() {
@@ -113,18 +167,27 @@ export class LoginPage implements OnInit {
 
   checkboxes(flag)
   {
-
     if (flag.detail.checked)
     {
-      this.checkboxValue = 'Yes'
+      this.checkboxValue = 'yes'
+      Storage.set({
+        key: 'password',
+        value: this.regCredentials.value.pwd
+      });
     }
     else
     {
-      this.checkboxValue = 'No'
+      this.checkboxValue = 'no'
+      Storage.set({
+        key: 'password',
+        value: ''
+      });
     }
     Storage.set({
       key: 'IsRememberMe',
       value: this.checkboxValue
     });
   }
+
+
 }

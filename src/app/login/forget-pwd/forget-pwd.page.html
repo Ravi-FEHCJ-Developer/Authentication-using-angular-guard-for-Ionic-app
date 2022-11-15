@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="light"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Forget Password</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div class="row">
+    <div class="login-box">
+      <div class="login-title">Forget Password</div>
+
+      <div class="login-form">
+        <div class="login-form">
+          <form [formGroup]="forgetPasswordCredentials" (ngSubmit)="updatePwd()">
+            <div class="form-group">
+              <label class="form-control-label">Email</label>
+              <input
+                name="email"
+                formControlName="email"
+                type="email"
+                class="form-control"
+              />
+              <span
+                class="text-error"
+                *ngIf="!isEmailValid"
+                >Please enter valid email</span
+              >
+            </div>
+            <div class="form-group" *ngIf="isEmail">
+              <label class="form-control-label" required>PASSWORD</label>
+              <input
+                name="pwd"
+                formControlName="pwd"
+                type="password"
+                [min]="8"
+                class="form-control"
+              />
+              <span
+                class="text-error"
+                *ngIf="forgetPasswordCredentials.get('pwd').hasError('required') && forgetPasswordCredentials.get('pwd').touched"
+                >Please enter Password</span
+              >
+              <span
+                class="text-error"
+                *ngIf="forgetPasswordCredentials.get('pwd').hasError('minlength') && forgetPasswordCredentials.get('pwd').touched"
+                >Password should be atleast 8 length.</span
+              >
+            </div>
+
+            <div class="loginbttm">
+              <div class="login-btm login-text"></div>
+              <div class="login-btm login-button">
+                <button
+                  id="submitbtn"
+                  type="submit"
+                  class="btn btn-outline-primary"
+                  [disabled]="forgetPasswordCredentials.invalid"
+                >
+                  SUBMIT
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+

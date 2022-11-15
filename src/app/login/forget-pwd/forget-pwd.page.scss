@@ -12,13 +12,6 @@
   padding-top: 100px;
 }
 
-.login-key {
-  font-size: 80px;
-  line-height: 100px;
-  background: -webkit-linear-gradient(#27EF9F, #0DB8DE);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 .login-title
 {
@@ -171,6 +164,12 @@ ion-checkbox::part(container) {
   width: 100%;
   padding: 0px;
   padding: 0% 15% 0% 15%;
+  align-items: baseline;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.forgetPassword
+{
+
 }
