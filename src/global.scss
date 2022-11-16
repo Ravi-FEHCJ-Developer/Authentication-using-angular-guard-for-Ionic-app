@@ -24,8 +24,9 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
-ion-toolbar
-{
-  --background: #1a2226;
-}
+// @import "~@mdi/font/scss/materialdesignicons.scss";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sen&display=swap");
+// @import "../node_modules/angular-calendar/css/angular-calendar.css";
+// @import url("assets/css/util.css");
+@import "~@angular/material/theming";

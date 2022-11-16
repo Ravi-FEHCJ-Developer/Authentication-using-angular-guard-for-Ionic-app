@@ -15,7 +15,7 @@
       <div class="login-form">
         <div class="login-form">
           <form [formGroup]="forgetPasswordCredentials" (ngSubmit)="updatePwd()">
-            <div class="form-group">
+            <div class="form-group" *ngIf="!isEmail && !isPassword">
               <label class="form-control-label">Email</label>
               <input
                 name="email"
@@ -29,7 +29,7 @@
                 >Please enter valid email</span
               >
             </div>
-            <div class="form-group" *ngIf="isEmail">
+            <div class="form-group" *ngIf="isEmail && isPassword">
               <label class="form-control-label" required>PASSWORD</label>
               <input
                 name="pwd"

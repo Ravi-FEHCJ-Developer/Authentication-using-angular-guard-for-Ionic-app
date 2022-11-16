@@ -19,9 +19,10 @@ export class ForgetPwdPage implements OnInit {
 
   forgetPasswordCredentials: FormGroup;
   isEmail: boolean = false;
+  isPassword: boolean = false;
   isEmailValid: boolean = true;
 
-  constructor(    private authenticationService: AuthenticationService,
+  constructor(private authenticationService: AuthenticationService,
     private route: Router,
     private activatedRoute: ActivatedRoute) { }
 
@@ -55,13 +56,24 @@ export class ForgetPwdPage implements OnInit {
           {
             console.log('Email does not exist.');
             this.isEmail = false;
+            this.isPassword = false;
             this.isEmailValid = false;
           }
           else
           {
             console.log('Email exist.');
+            if(this.isPassword === true)
+            {
+              parsedArray[i].pwd = this.forgetPasswordCredentials.value.pwd
+              console.log(parsedArray)
+              this.authenticationService.updateUserData(parsedArray);
+              this.route.navigate(['login'])
+            }
             this.isEmail = true;
+            this.isPassword = true;
             this.isEmailValid = true;
+
+
             break;
           }
         }

@@ -5,7 +5,7 @@
 .login-box
 {
   width: 100%;
-  background: #1A2226;
+  // background: #1A2226;
   text-align: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   height: 100vh;
@@ -28,7 +28,7 @@
   letter-spacing: 2px;
   margin-top: 15px;
   font-weight: bold;
-  color: #ECF0F5;
+  // color: #ECF0F5;
 }
 
 .login-form {
@@ -38,7 +38,7 @@
 
 input[type=text] , input[type=email]
 {
-  background-color: #1A2226;
+  // background-color: #1A2226;
   border: none;
   border-bottom: 2px solid #0DB8DE;
   border-top: 0px;
@@ -47,11 +47,11 @@ input[type=text] , input[type=email]
   outline: 0;
   margin-bottom: 20px;
   padding-left: 0px;
-  color: #ECF0F5;
+  // color: #ECF0F5;
 }
 
 input[type=password] {
-  background-color: #1A2226;
+  // background-color: #1A2226;
   border: none;
   border-bottom: 2px solid #0DB8DE;
   border-top: 0px;
@@ -60,7 +60,7 @@ input[type=password] {
   outline: 0;
   padding-left: 0px;
   margin-bottom: 20px;
-  color: #ECF0F5;
+  // color: #ECF0F5;
 }
 
 .form-group {
@@ -74,8 +74,8 @@ input[type=password] {
   box-shadow: none;
   border-bottom: 2px solid #0DB8DE;
   outline: 0;
-  background-color: #1A2226;
-  color: #ECF0F5;
+  // background-color: #1A2226;
+  // color: #ECF0F5;
 }
 
 input:focus {
@@ -89,7 +89,7 @@ label {
 
 .form-control-label {
   font-size: 10px;
-  color: #6C6C6C;
+  // color: #6C6C6C;
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -121,7 +121,7 @@ label {
 .login-text {
   text-align: left;
   padding-left: 0px;
-  color: #A2A4A4;
+  // color: #A2A4A4;
 }
 
 .loginbttm
@@ -131,10 +131,10 @@ label {
 
 ion-item,ion-list,ion-radio-group
 {
-  --background: #1A2226;
+  // --background: #1A2226;
   ion-label
   {
-    --color: white;
+    // --color: white;
   }
 }
 
@@ -173,4 +173,11 @@ ion-checkbox::part(container) {
   padding: 0% 15% 0% 15%;
   display: flex;
   justify-content: center;
+}
+
+
+ion-action-sheet.action-sheet-button.sc-ion-action-sheet-md
+{
+  --button-color: var(--ion-color-light);
+  --color: var(--button-color);
 }

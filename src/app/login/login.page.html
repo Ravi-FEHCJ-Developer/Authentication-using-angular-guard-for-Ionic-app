@@ -4,7 +4,7 @@
     <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
       <ng-template>
         <ion-content class="ion-padding" routerLink="forgetpwd" (click)="closePopover()">Forget Password</ion-content>
-        <ion-content class="ion-padding" routerLink="" (click)="closePopover()">Change Theme</ion-content>
+        <ion-content class="ion-padding" (click)="presentActionSheet()">Change Theme</ion-content>
       </ng-template>
     </ion-popover>
 
@@ -87,7 +87,7 @@
                 (ionChange)="checkboxes($event)"
                 [checked]="checkboxStatus"
               ></ion-checkbox>
-              <ion-label>Remember Me</ion-label>
+              <ion-label color="light">Remember Me</ion-label>
             </ion-item>
 
             <div class="button_switch_form">
@@ -120,10 +120,9 @@
               <div class="SwitchLoginLogout">
                 <div class="login-btm login-text">
                   Switch To
-                  <span
+                  <span color="light"
                     style="
                       text-decoration: underline;
-                      color: white;
                       cursor: pointer;
                     "
                     (click)="switchRegLogin()"

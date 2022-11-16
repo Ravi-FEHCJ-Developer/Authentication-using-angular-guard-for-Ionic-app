@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable @typescript-eslint/adjacent-overload-signatures */
 /* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/dot-notation */
@@ -5,12 +6,15 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/quotes */
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { Storage } from '@capacitor/storage';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
+
+import { ActionSheetController } from '@ionic/angular';
+import { inject } from '@angular/core/testing';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +29,7 @@ export class LoginPage implements OnInit {
   repwd: any;
   checkboxValue: any = 'No';
   password: any = 'No';
-  checkboxStatus: any = 'No';
+  checkboxStatus: any = false;
 
   // popover
   @ViewChild('popover') popover;
@@ -34,8 +38,10 @@ export class LoginPage implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private route: Router,
-    private activatedRoute: ActivatedRoute,public popoverController: PopoverController
+    @Inject(Router) private route,
+    @Inject(ActivatedRoute) private activatedRoute,
+    public popoverController: PopoverController,private actionSheetCtrl: ActionSheetController,
+    public renderer: Renderer2
   ) {}
 
   ngOnInit(): void
@@ -55,31 +61,33 @@ export class LoginPage implements OnInit {
       this.isLogin = true;
       this.authenticationService.isUserLogin().then(getEmail =>
         {
-          if(getEmail)
-          {
-            this.authenticationService.getPwd().then(getPwd=>
-              {
-                if(getPwd)
-                {
-                  this.regCredentials.patchValue({
-                    email: JSON.parse(getEmail.value).email,
-                    pwd: getPwd.value
-                  });
-                }
-              })
-          }
-
           this.authenticationService.getIsRememberMe().then((rememberMeChecked) =>
           {
             if(rememberMeChecked.value === 'yes')
             {
+              console.log("yes")
+              if(getEmail.value)
+              {
+                console.log(getEmail)
+                this.authenticationService.getPwd().then(getPwd=>
+                  {
+                    if(getPwd.value)
+                    {
+                      this.regCredentials.patchValue({
+                        email: JSON.parse(getEmail.value).email,
+                        pwd: getPwd.value
+                      });
+                    }
+                  })
+              }
+
               this.checkboxStatus = true;
             }
             else if(rememberMeChecked.value === 'no')
             {
+              console.log("no")
               this.checkboxStatus = false;
             }
-            console.log(rememberMeChecked.value);
           })
         })
     });
@@ -189,5 +197,47 @@ export class LoginPage implements OnInit {
     });
   }
 
+
+  // Theme Change action sheet
+  result: string;
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Choose Theme',
+      cssClass: 'actionSheetText',
+      buttons: [
+        {
+          text: 'green',
+          role: 'destructive',
+          handler: () => {
+            this.changeColor('green')
+          }
+        },
+        {
+          text: 'Blue',
+          handler: () => {
+            this.changeColor('blue')
+          }
+        },
+        {
+          text: 'Default',
+          handler: () => {
+            this.changeColor('default')
+          }
+        },
+      ],
+    });
+
+    this.closePopover();
+    await actionSheet.present();
+
+    const result = await actionSheet.onDidDismiss();
+    this.result = JSON.stringify(result, null, 2);
+  }
+
+  changeColor(color)
+  {
+    this.renderer.setAttribute(document.body , 'color-theme' , color)
+  }
 
 }
