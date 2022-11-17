@@ -4,12 +4,13 @@
     <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
       <ng-template>
         <ion-content class="ion-padding" routerLink="forgetpwd" (click)="closePopover()">Forget Password</ion-content>
-        <ion-content class="ion-padding" (click)="presentActionSheet()">Change Theme</ion-content>
+        <ion-content class="ion-padding" (click)="changeThemeActionSheet()">Change Theme</ion-content>
+        <ion-content class="ion-padding" (click)="changeLangActionSheet()">Change Language</ion-content>
       </ng-template>
     </ion-popover>
 
-  <ion-title color="light" *ngIf="isLogin">Login</ion-title>
-    <ion-title color="light" *ngIf="!isLogin">Sign Up</ion-title>
+  <ion-title color="light" *ngIf="isLogin"  translate="login.TITLE"></ion-title>
+    <ion-title color="light" *ngIf="!isLogin"  translate="signup.TITLE"></ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -19,8 +20,6 @@
       <div class="login-key">
         <i class="fa fa-user" aria-hidden="true"></i>
       </div>
-      <!-- <div class="login-title" *ngIf="isLogin">Login</div>
-      <div class="login-title" *ngIf="!isLogin">Sign Up</div> -->
 
       <div class="login-form">
         <div class="login-form">
@@ -67,7 +66,6 @@
                 [min]="8"
                 class="form-control"
               />
-              <!-- (ngModelChange)="getRePwd($event , 2)" -->
               <span
                 class="text-error"
                 *ngIf="regCredentials.get('pwd').hasError('required') && regCredentials.get('pwd').touched"
@@ -87,7 +85,7 @@
                 (ionChange)="checkboxes($event)"
                 [checked]="checkboxStatus"
               ></ion-checkbox>
-              <ion-label color="light">Remember Me</ion-label>
+              <ion-label color="light" translate="login.REMEMBERME"></ion-label>
             </ion-item>
 
             <div class="button_switch_form">
@@ -101,8 +99,8 @@
                     type="submit"
                     class="btn btn-outline-primary"
                     [disabled]="regCredentials.invalid"
+                    translate="signup.TITLE"
                   >
-                    SIGN UP
                   </button>
 
                   <button
@@ -112,8 +110,8 @@
                     type="submit"
                     class="btn btn-outline-primary"
                     [disabled]="regCredentials.invalid"
+                    translate="login.TITLE"
                   >
-                    LOGIN
                   </button>
                 </div>
               </div>

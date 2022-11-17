@@ -8,7 +8,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
@@ -24,11 +24,11 @@ export class AuthGuard implements CanActivate {
   ) {}
 
   canActivate(): any {
-    Storage.get({
+    Preferences.get({
       key: 'authData',
     }).then((v) => {
       this.parsedArray = JSON.parse(v.value);
-      Storage.get({
+      Preferences.get({
         key: 'isUserLogin',
       }).then((val: any) => {
         if(val.value)

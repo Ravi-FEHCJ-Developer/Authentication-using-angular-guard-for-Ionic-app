@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/quotes */
 import { Injectable } from '@angular/core';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/Preferences';
 import { HttpClient } from '@angular/common/http';
 import { CanActivate } from '@angular/router';
 
@@ -24,7 +24,7 @@ export class AuthenticationService
 
   storeRegCred(obj)
   {
-    Storage.get({
+    Preferences.get({
       key: 'authData',
     }).then((v)=>
     {
@@ -33,7 +33,7 @@ export class AuthenticationService
         this.arr = JSON.parse(v.value);
       }
       this.arr.push(obj);
-      Storage.set({
+      Preferences.set({
         key: 'authData',
         value: JSON.stringify(this.arr),
       });
@@ -42,27 +42,27 @@ export class AuthenticationService
 
   isUserLogin()
   {
-    return Storage.get({
+    return Preferences.get({
       key: 'isUserLogin',
     });
   }
 
   getListData()
   {
-    return Storage.get({
+    return Preferences.get({
       key: 'authData'
     });
   }
 
   updateUserData(list)
   {
-    Storage.get({
+    Preferences.get({
       key: 'authData',
     }).then((v)=>
     {
       if(v.value)
       {
-        Storage.set({
+        Preferences.set({
           key: 'authData',
           value: JSON.stringify(list),
         });
@@ -72,14 +72,14 @@ export class AuthenticationService
 
   getPwd()
   {
-    return Storage.get({
+    return Preferences.get({
       key: 'password'
     });
   }
 
   getIsRememberMe()
   {
-    return Storage.get({
+    return Preferences.get({
       key: 'IsRememberMe'
     });
   }

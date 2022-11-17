@@ -1,0 +1,20 @@
+{
+  "login":
+  {
+    "TITLE": "Anmeldung",
+    "PASSWORD": "Passwort",
+    "REMEMBERME": "behalte mich in Erinnerung"
+  },
+  "signup":
+  {
+    "TITLE": "Anmelden",
+    "PASSWORD": "Passwort"
+  },
+  "NAME": "Bonjour Monsieur",
+  "NAME_2": "Bonjour {{value}}",
+  "GENDER": "Geschlecht",
+  "DOB": "Geburtsdatum",
+  "description": "Ooohh .... vous venez de traduire ce texte?",
+  "data" :{
+  "name": "je m'appelle {{name_value}}"}
+  }

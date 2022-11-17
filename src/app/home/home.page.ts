@@ -6,7 +6,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { MenuController } from '@ionic/angular';
@@ -60,7 +60,7 @@ export class HomePage implements OnInit
         this.name = (this.results.name.title + " " + this.results.name.first + " " + this.results.name.last)
         this.dob = this.results.dob.age
         this.gender = this.results.gender
-        Storage.get({
+        Preferences.get({
           key: 'isUserLogin',
         }).then((val: any) =>
         {

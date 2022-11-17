@@ -2,8 +2,9 @@
 /* eslint-disable @typescript-eslint/semi */
 /* eslint-disable @typescript-eslint/quotes */
 import { Component } from '@angular/core';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/Preferences';
 import { Router } from '@angular/router';
+import { LanguagesService } from './services/languages.service';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   navigate : any;
-  constructor(private route: Router)
+  constructor(private route: Router, private languagesService: LanguagesService)
   {
+    console.log("hdagj")
+    this.languagesService.setInitialAppLanguage();
+
     this.navigate =
     [
       {
@@ -43,7 +47,7 @@ export class AppComponent {
   {
     if(notation === 'logout')
     {
-      Storage.remove({
+      Preferences.remove({
         key: 'isUserLogin'
       }).then((res: any)=>
       {

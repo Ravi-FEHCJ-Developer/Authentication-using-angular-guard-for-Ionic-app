@@ -1,0 +1,20 @@
+{
+  "login":
+  {
+    "TITLE": "Login",
+    "PASSWORD": "Password",
+    "REMEMBERME": "Remember Me"
+  },
+  "signup":
+  {
+    "TITLE": "Sign Up",
+    "PASSWORD": "Password"
+  },
+  "NAME": "Hello sir",
+  "NAME_2": "Hello {{value}}",
+  "GENDER": "Gender",
+  "DOB": "DOB",
+  "description": "Ooohh .... did you just translate this text ?",
+  "data": {
+  "name": "My name is {{name_value}}"}
+  }

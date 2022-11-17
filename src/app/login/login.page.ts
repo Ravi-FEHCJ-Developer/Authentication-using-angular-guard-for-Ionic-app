@@ -7,14 +7,16 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 /* eslint-disable @typescript-eslint/quotes */
 import { Component, Inject, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import * as forms from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/Preferences';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 
 import { ActionSheetController } from '@ionic/angular';
 import { inject } from '@angular/core/testing';
+
+import { LanguagesService } from '../services/languages.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,7 @@ import { inject } from '@angular/core/testing';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  regCredentials: FormGroup;
+  regCredentials: forms.FormGroup;
 
   isLogin: boolean = true;
   parsedArray: any = [];
@@ -41,20 +43,21 @@ export class LoginPage implements OnInit {
     @Inject(Router) private route,
     @Inject(ActivatedRoute) private activatedRoute,
     public popoverController: PopoverController,private actionSheetCtrl: ActionSheetController,
-    public renderer: Renderer2
+    public renderer: Renderer2,
+    public languagesService: LanguagesService,
   ) {}
 
   ngOnInit(): void
   {
-    this.regCredentials = new FormGroup({
-      username: new FormControl(''),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern(
+    this.regCredentials = new forms.FormGroup({
+      username: new forms.FormControl(''),
+      email: new forms.FormControl('', [
+        forms.Validators.required,
+        forms.Validators.pattern(
           '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{1,100}$'
         ),
       ]),
-      pwd: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      pwd: new forms.FormControl('', [forms.Validators.required, forms.Validators.minLength(8)]),
     });
     this.activatedRoute.queryParamMap.subscribe((params) =>
     {
@@ -111,7 +114,7 @@ export class LoginPage implements OnInit {
       this.regCredentials.get('username').clearValidators();
       this.regCredentials.get('username').updateValueAndValidity();
     } else {
-      this.regCredentials.get('username').setValidators([Validators.required]);
+      this.regCredentials.get('username').setValidators([forms.Validators.required]);
       this.regCredentials.get('username').updateValueAndValidity();
     }
   }
@@ -121,7 +124,7 @@ export class LoginPage implements OnInit {
       return null;
     }
     if (value === 'signup') {
-      Storage.get({
+      Preferences.get({
         key: 'authData',
       }).then((res) => {
         this.parsedArray = JSON.parse(res.value);
@@ -140,7 +143,7 @@ export class LoginPage implements OnInit {
     } else if (value === 'login') {
       const email = this.regCredentials.value.email;
       const pwd = this.regCredentials.value.pwd;
-      Storage.get({
+      Preferences.get({
         key: 'authData',
       }).then((v) => {
         if (v.value) {
@@ -167,7 +170,7 @@ export class LoginPage implements OnInit {
       email,
       username,
     };
-    Storage.set({
+    Preferences.set({
       key: 'isUserLogin',
       value: JSON.stringify(obj),
     });
@@ -178,7 +181,7 @@ export class LoginPage implements OnInit {
     if (flag.detail.checked)
     {
       this.checkboxValue = 'yes'
-      Storage.set({
+      Preferences.set({
         key: 'password',
         value: this.regCredentials.value.pwd
       });
@@ -186,12 +189,12 @@ export class LoginPage implements OnInit {
     else
     {
       this.checkboxValue = 'no'
-      Storage.set({
+      Preferences.set({
         key: 'password',
         value: ''
       });
     }
-    Storage.set({
+    Preferences.set({
       key: 'IsRememberMe',
       value: this.checkboxValue
     });
@@ -201,7 +204,7 @@ export class LoginPage implements OnInit {
   // Theme Change action sheet
   result: string;
 
-  async presentActionSheet() {
+  async changeThemeActionSheet() {
     const actionSheet = await this.actionSheetCtrl.create({
       header: 'Choose Theme',
       cssClass: 'actionSheetText',
@@ -240,4 +243,37 @@ export class LoginPage implements OnInit {
     this.renderer.setAttribute(document.body , 'color-theme' , color)
   }
 
+
+  async changeLangActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Choose Language',
+      cssClass: 'actionSheetText',
+      buttons: [
+        {
+          text: 'English',
+          handler: () => {
+            this.languagesService.setLanguage('en')
+          }
+        },
+        // {
+        //   text: 'Spanish',
+        //   handler: () => {
+        //     this.languagesService.setLanguage('en')
+        //   }
+        // },
+        {
+          text: 'German',
+          handler: () => {
+            this.languagesService.setLanguage('de')
+          }
+        },
+      ],
+    });
+
+    this.closePopover();
+    await actionSheet.present();
+
+    const result = await actionSheet.onDidDismiss();
+    this.result = JSON.stringify(result, null, 2);
+  }
 }

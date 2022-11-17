@@ -7,7 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../authentication.service';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({

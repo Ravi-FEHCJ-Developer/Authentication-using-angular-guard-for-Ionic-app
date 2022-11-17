@@ -176,8 +176,13 @@ ion-checkbox::part(container) {
 }
 
 
-ion-action-sheet.action-sheet-button.sc-ion-action-sheet-md
-{
+
+::ng-deep .actionSheetText {
+  --background: var();
+  --backdrop-opacity: 0.6;
+  --button-background-selected: #e97223;
   --button-color: var(--ion-color-light);
-  --color: var(--button-color);
+  --color: var(--ion-color-light);
+  /* role: "destructive" button iOS styling override */
+  --ion-color-danger: #000000;
 }
